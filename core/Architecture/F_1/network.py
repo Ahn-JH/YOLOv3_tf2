@@ -12,13 +12,12 @@
 #================================================================
 
 import sys
-sys.path.append('/home/jihun/TF2/')
 import tensorflow as tf
-import core.common as common
 import core.utils as utils
 import tensorflow.keras.layers as keras
 from core.config import cfg
-
+from importlib import import_module
+common = import_module(f'core.common_{cfg.YOLO.Activation}')
 
 def Darknet(name=None):
     SIZE            = cfg.TRAIN.INPUT_SIZE

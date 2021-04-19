@@ -20,7 +20,8 @@ def call_args():
     parser.add_argument('--WSTEP', required=False, default=0, type=int, help='Set Warmup STEP, DO NOT USE WITH Warm OPTION')
     parser.add_argument('--CHECKPOINT','--CHECK', required=False, default=9999, type=int, help='Checkpoint')
     parser.add_argument('--Load','--L', required=False, default=False, type=bool, help='Choosing Load weight or not [True/False] | Default : False')
-
+    parser.add_argument('--Loss', required=False, default="focal", type=str, help='Choosing Loss Function focal/mse/no_focal/ciou')
+    parser.add_argument('--Activation', '--A', required=False, default='ReLu', type=str, help='Activation function Mish/ReLu')
 
     return parser
 

@@ -18,7 +18,7 @@ import tensorflow as tf
 import core.utils as utils
 from importlib import import_module
 from core.dataset import Dataset
-from core.yolov3 import decode, compute_loss
+from core.yolov3 import decode
 from core.config import cfg
 from core.utils import write_network
 from core.network import YOLOv3, Darknet
@@ -69,6 +69,7 @@ TOTAL_STEPS     = cfg.TRAIN.EPOCHS * STEPS_PER_EPOCH
 
 network         = import_module(f'core.Architecture.{cfg.YOLO.NETWORK}.network')
 YOLOv3, Darknet = network.YOLOv3, network.Darknet
+comput_loss     = import_module(f'core.yolov3.comput_loss_{cfg.YOLO.LOSS}
 input_tensor    = tf.keras.layers.Input([416, 416, 3])
 
 def build(input_tensor):
@@ -148,6 +149,7 @@ for epoch in range(cfg.TRAIN.EPOCHS):
         print("=> STEP %4d / %4d lr: %.6f | giou_loss: %4.2f | conf_loss: %4.2f | prob_loss: %4.2f | total_loss: %4.2f"
                 %(info[0],info[1],info[2],info[3],info[4],info[5],info[6]))
         count += 1
+
     END = time.time()
     Accumulated_time = round(END - START,1)
     Epoch_time =round((END - EPOCH_TIME)/count,2)
